@@ -1,0 +1,27 @@
+.table {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    overflow-wrap: anywhere;
+    table-layout: fixed;
+    box-shadow: 0 0 30px 1px var(--shadow-color);
+    text-align: right;
+    border-radius: var(--border-radius);
+    border-bottom: 8px solid var(--shadow-color);
+    height: 1000px;
+}
+
+.table col {
+    width: 100%;
+}
+.table col:first-of-type {
+    width: 75%;
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+@media only screen and (min-width: 1024px) {
+
+}

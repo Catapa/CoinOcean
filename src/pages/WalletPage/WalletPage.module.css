@@ -1,0 +1,41 @@
+.title {
+    font-size: 3rem;
+    font-weight: normal;
+}
+.add_button {
+    background-color: var(--fill-color);
+    border: 3px solid var(--accent-color);
+    /*box-shadow: 0 0 10px 10px var(--shadow-color);*/
+    padding: 1rem 0.5rem;
+    font-size: 2rem;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.add_button:hover {
+    background-color: var(--shadow-color);
+}
+
+input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid var(--accent-color);
+    font-size: 1.5rem;
+    height: 2rem;
+    text-align: right;
+    width: 75%;
+}
+
+.add_coin_section {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    /*padding: 1em;*/
+}
+
+.add_coin_section>section {
+    margin: 0.5em 1em;
+    text-align: right;
+}
+

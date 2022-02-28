@@ -1,0 +1,40 @@
+.change_interval_buttons_container {
+    width: 100%;
+    grid-column: 1/7;
+    grid-row: 2/3;
+    align-self: end;
+}
+.change_interval_button {
+    background-color: var(--fill-color);
+    padding: 1rem 0.5rem;
+    text-decoration: none;
+    margin: 10px 5px;
+    border: 1px solid var(--accent-color);
+    cursor: pointer;
+    border-radius: 20px;
+    width: 50px;
+    font-size: 0.75rem;
+}
+.active {
+    background-color: var(--accent-color);
+    color: var(--font-color-contrast);
+}
+.buttons_label {
+    font-size: 1.25rem;
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+@media only screen and (min-width: 1024px) {
+    .change_interval_buttons_container {
+        grid-column: 5/7;
+        grid-row: 1/2;
+    }
+    .change_interval_button {
+        font-size: 1rem;
+    }
+    .buttons_label {
+        font-size: 1.5rem;
+    }
+}

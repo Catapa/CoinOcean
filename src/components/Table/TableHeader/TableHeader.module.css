@@ -1,0 +1,23 @@
+.table_header {
+    background-color: var(--accent-color);
+    color: var(--font-color-contrast);
+    font-size: 0.9rem;
+
+}
+
+.table_header th {
+    padding: 2rem 1rem;
+    font-weight: normal;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .table_header {
+        font-size: 1rem;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .table_header {
+        font-size: 1.25rem;
+    }
+}

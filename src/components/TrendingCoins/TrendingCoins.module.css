@@ -1,0 +1,21 @@
+.trending_coins_container {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    margin: 2em 0;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+.trending_coins_label {
+    font-size: 2rem;
+    font-weight: normal;
+}
+
+@media only screen and (min-width: 768px) {
+    .trending_coins_container {
+        flex-direction: row;
+    }
+}
+@media only screen and (min-width: 1920px) {
+
+}

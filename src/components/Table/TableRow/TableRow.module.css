@@ -1,0 +1,42 @@
+.table_row {
+    cursor: pointer;
+}
+.table_row td {
+    padding: 1.5rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+
+}
+.table_row td > span {
+    height: 100%;
+    width: 100%;
+    /*overflow: auto;*/
+    display: block;
+    padding: 4px;
+    overflow: hidden;
+}
+.green {
+    background-color: var(--green);
+}
+.red {
+    background-color: var(--red);
+}
+.table_row:hover {
+    background-color: var(--accent-color-light);
+    box-shadow: 0 0 10px var(--shadow-color);
+}
+.table_row img {
+    width: 75%;
+    height: 75%;
+}
+
+@media only screen and (min-width: 768px) {
+    .table_row td {
+        font-size: 0.9rem;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .table_row td {
+        font-size: 1.1rem;
+    }
+}

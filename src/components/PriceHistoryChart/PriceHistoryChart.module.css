@@ -1,0 +1,14 @@
+.chart {
+    grid-column: 3/7;
+    grid-row: 4/7;
+    width: 100% !important;
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+@media only screen and (min-width: 1024px) {
+    .chart {
+        grid-row: 3/7;
+    }
+}
