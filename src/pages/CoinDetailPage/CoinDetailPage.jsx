@@ -54,7 +54,6 @@ const CoinDetailPage = () => {
                 <span>All Time Low: {(coin.market_data) && coin.market_data.atl.usd}</span>
                 <span>Since ATL: {(coin.market_data) && coin.market_data.atl_change_percentage.usd}</span>
                 <span>Liquidity Score: {coin.liquidity_score}</span>
-                <span>:jeffpog:</span>
             </aside>
             <div className={styles.description}>&emsp;{(coin.description) && clearHTML(coin.description.en)}</div>
             <PriceHistoryChart coinID={coinID} coinName={coin.name}/>
