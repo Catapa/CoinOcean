@@ -1,8 +1,8 @@
-import React from 'react'
-import styles from './TableRow.module.css'
-import type {TableRowProps} from "../TableProps";
+import React from 'react';
+import styles from './TableRow.module.css';
+import type {TTableRowProps} from "../TableProps";
 import {formatNumber} from "../../../utils/utils";
-const TableRow = ({fieldKeys, rowData, onClick}: TableRowProps) => {
+const TableRow = ({fieldKeys, rowData, onClick}: TTableRowProps) => {
     const getStyles = (key: string, data: number) => {
         let classes = [];
         if (key.includes('price_change_percentage')) {
@@ -31,6 +31,6 @@ const TableRow = ({fieldKeys, rowData, onClick}: TableRowProps) => {
                 )
             }
         </tr>
-    )
-}
-export default TableRow
+    );
+};
+export default TableRow;

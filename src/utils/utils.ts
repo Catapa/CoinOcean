@@ -1,27 +1,28 @@
-export const clearHTML =  (stringWithHTML: string) => {
+export const clearHTML = (stringWithHTML: string) => {
     const regex = /(<([^>]+)>)/ig;
-    const stringWithoutHTML: string =  stringWithHTML.replace(regex, '');
+    const stringWithoutHTML: string = stringWithHTML.replace(regex, '');
     return stringWithoutHTML;
 }
 
 // TODO: future improvement
 export const formatNumber = (input: string | number) => {
-    const number = parseFloat(input)
+    const number: number = (typeof input === 'string') ? parseFloat(input) : input;
     if (!isNaN(number)) {
         if (Math.round(number) === number) {
             return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         } else {
-            return parseFloat(input).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            const parsedInput = (typeof input === 'string') ? parseFloat(input) : input;
+            return parsedInput.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     }
-    else if (!input){
+    else if (!input) {
         return 'No Data';
     }
 
     return input
 }
 
-export interface CoinType  {
+export type TCoin = {
     block_time_in_minutes: number,
     categories: string[],
     description: {

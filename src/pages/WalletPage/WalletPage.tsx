@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import styles from './WalletPage.module.css';
 import {api} from "../../api/api";
+import { TCoin } from '../../utils/utils';
 
 const WalletPage = () => {
-    let [coinPrice, setCoinPrice] = useState('');
+    let [coinPrice, setCoinPrice] = useState(0);
     let [selectedCoin, setSelectedCoin] = useState('');
-    let [selectedAmount: number, setSelectedAmount] = useState();
-    let [coinList, setCoinList] = useState([]);
+    let [selectedAmount, setSelectedAmount] = useState(0);
+    let [coinList, setCoinList] = useState<TCoin[]>([]);
     const API = new api.CoinGecko();
     useEffect(() => {
         API.get.coins_list()
@@ -46,18 +47,18 @@ const WalletPage = () => {
         }
     ]
 
-    const addToWallet = (coinID: string) => {
+    const addToWallet = (coinID?: string) => {
         console.log('added ', coinID);
     }
 
     return (
         <div>
             <h2>(Page Under Construction)</h2>
-            <h2 className={styles.title}>My Portfolio</h2>
+            <h1 className={styles.title}>My Portfolio</h1>
             <div className={styles.add_coin_section}>
                 <section>
                     <input  list={'coins'} type={'text'} placeholder={'Select Coin'} value={selectedCoin} onInput={e => {
-                        const {value} = e.target;
+                        const {value} = e.target as HTMLInputElement;
                         console.log('value', value);
                         return setSelectedCoin(value);
                     }}/>
@@ -74,8 +75,8 @@ const WalletPage = () => {
                 </section><br/>
                 <section>
                     <input type={'number'} placeholder={'Select Amount'} value={selectedAmount} onInput={e => {
-                        const {value} = e.target;
-                        return setSelectedAmount(value);
+                        const {value} = e.target as HTMLInputElement;
+                        return setSelectedAmount(parseFloat(value));
                     }}/>
                 </section><br/>
 
@@ -95,6 +96,6 @@ const WalletPage = () => {
                 })
             }
         </div>
-    )
-}
+    );
+};
 export default WalletPage;

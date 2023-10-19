@@ -1,9 +1,13 @@
-import React, {useState} from 'react'
-import styles from './ChangeIntervalButtons.module.css'
+import React, {useState} from 'react';
+import styles from './ChangeIntervalButtons.module.css';
 
-const ChangeIntervalButtons = ({onChangeInterval}: EventHandlerNonNull) => {
+type TProps = {
+    onChangeInterval: Function
+};
+
+const ChangeIntervalButtons = ({onChangeInterval}: TProps) => {
     const intervalChangeOptions: string[] = ['24h', '7d', '30d', '60d', '200d','1y'];
-    let [activeInterval: string, setActiveInterval] = useState(intervalChangeOptions[0]);
+    let [activeInterval, setActiveInterval] = useState(intervalChangeOptions[0]);
 
     const toggleActiveInterval = (index: number) => {
         let selectedInterval = intervalChangeOptions[index];

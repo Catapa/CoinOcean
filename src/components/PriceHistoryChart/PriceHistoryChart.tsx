@@ -5,8 +5,11 @@ import {Line} from "react-chartjs-2";
 import {CategoryScale, Chart, Legend, LinearScale, LineElement, PointElement, Title, Tooltip} from "chart.js";
 
 
-const PriceHistoryChart = ({coinID, coinName}) => {
-
+type TPriceHistoryChart = {
+    coinID: string | undefined,
+    coinName: string | undefined
+};
+const PriceHistoryChart = ({coinID, coinName}: TPriceHistoryChart) => {
     const API = new api.CoinGecko();
     let [marketData, setMarketData] = useState(
         {
@@ -25,11 +28,11 @@ const PriceHistoryChart = ({coinID, coinName}) => {
                 throw error;
             });
     }, []);
-    let [pricesState, setPricesState] = useState([]);
-    let [datesState, setDatesState] = useState([]);
+    let [pricesState, setPricesState] = useState<number[]>([]);
+    let [datesState, setDatesState] = useState<string[]>([]);
     const parsePrices = (priceData: Array<number>[]) => {
         let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        let dates: number[] = [];
+        let dates: string[] = [];
         let prices: number[] = [];
         priceData.map(([date, price]) => {
             let parsedDate = new Date(date);
@@ -66,7 +69,7 @@ const PriceHistoryChart = ({coinID, coinName}) => {
         ]
     }
 
-    const chartOptions = {
+    const chartOptions: Object = {
         responsive: true,
         plugins: {
             legend: {
@@ -95,6 +98,6 @@ const PriceHistoryChart = ({coinID, coinName}) => {
     return (
             <Line className={styles.chart} data={chartData} options={chartOptions}/>
     )
-}
+};
 
-export default PriceHistoryChart
+export default PriceHistoryChart;

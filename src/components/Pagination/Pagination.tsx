@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import styles from './Pagination.module.css';
 import {range} from "../../utils/utils";
-const Pagination = ({onPageSelect}: EventHandlerNonNull) => {
+
+type TPaginationProps = {
+    onPageSelect: Function
+}
+const Pagination = ({onPageSelect}: TPaginationProps) => {
     const first_page = 1;
     const last_page = 100;
     const pages: number[] = range(first_page, last_page);
-    let [currentPage: number, setCurrentPage] = useState(pages[0]);
+    let [currentPage, setCurrentPage] = useState(pages[0]);
     const display_pages_count = 10;
     let display_pages: number[] = (currentPage - display_pages_count/2 < first_page) ?
                                         range(first_page, display_pages_count)

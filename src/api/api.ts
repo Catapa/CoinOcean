@@ -1,4 +1,9 @@
-import axios, {Axios} from "axios"
+import axios, { Axios } from "axios";
+
+type TSimplePrice = {
+    usd: number
+};
+
 export class api {
     static CoinGecko = class {
         description: string = "CoinGecko API Instance";
@@ -9,16 +14,16 @@ export class api {
             coins_markets: //List all supported coin price, market cap, volume and market related data
                 (currency: string = 'usd', order: string = 'market_cap_desc', page: number = 1, per_page: number = 10) =>
                     `/coins/markets?vs_currency=${currency}&order=${order}&per_page=${per_page}&page=${page}&price_change_percentage=24h%2C7d%2C30d%2C1y`,
-            coins_id: (id: string) => `/coins/${id}`, //Get current data (name, price, market, ... including exchange tickers) for a coin.
+            coins_id: (id: string | undefined) => `/coins/${id}`, //Get current data (name, price, market, ... including exchange tickers) for a coin.
             coins_id_market_chart:
-                (id: string, currency : string = 'usd', days: string = 'max') => `coins/${id}/market_chart?vs_currency=${currency}&days=${days}`,
-                        //Get historical market data include price, market cap, and 24h volume (granularity auto)
-                        // Minutely data will be used for duration within 1 day, Hourly data will be used for duration between 1 day and 90 days,
-                        // Daily data will be used for duration above 90 days.
+                (id: string | undefined, currency: string = 'usd', days: string = 'max') => `coins/${id}/market_chart?vs_currency=${currency}&days=${days}`,
+            //Get historical market data include price, market cap, and 24h volume (granularity auto)
+            // Minutely data will be used for duration within 1 day, Hourly data will be used for duration between 1 day and 90 days,
+            // Daily data will be used for duration above 90 days.
             search_trending: 'search/trending', //Top-7 trending coins on CoinGecko as searched by users in the last 24 hours (Ordered by most popular first)
             simple_price: (id: string, currency: string = 'usd') => `/simple/price?ids=${id}&vs_currencies=${currency}`
         }
-        #AxiosInstance: Axios;
+        #AxiosInstance!: Axios;
         constructor() {
             try {
                 this.#AxiosInstance = axios.create({
@@ -31,12 +36,12 @@ export class api {
             }
 
         }
-        ping: PromiseRejectionEvent = async () => {
+        ping = async () => {
             const response = await this.#AxiosInstance.get(this.#paths.ping);
             return response.data;
         }
         get = {
-            coins_list: PromiseRejectionEvent = async () => {
+            coins_list: async () => {
                 try {
                     const response = await this.#AxiosInstance.get(this.#paths.coins_list);
                     return response.data;
@@ -46,7 +51,7 @@ export class api {
                     //throw error;
                 }
             },
-            coins_markets: PromiseRejectionEvent = async (currency?: string, order?: string, page?: number) => {
+            coins_markets: async (currency?: string, order?: string, page?: number) => {
                 try {
                     const response = await this.#AxiosInstance.get(this.#paths.coins_markets(currency, order, page));
                     return response.data
@@ -56,7 +61,7 @@ export class api {
                     // throw error;
                 }
             },
-            coins_id: PromiseRejectionEvent = async (id: string) => {
+            coins_id: async (id: string | undefined) => {
                 try {
                     const response = await this.#AxiosInstance.get(this.#paths.coins_id(id));
                     return response.data;
@@ -66,7 +71,7 @@ export class api {
                     // throw error;
                 }
             },
-            coins_id_market_chart: PromiseRejectionEvent = async (id: string, currency: string, days: string) => {
+            coins_id_market_chart: async (id: string | undefined, currency?: string, days?: string) => {
                 try {
                     const response = await this.#AxiosInstance.get(this.#paths.coins_id_market_chart(id, currency, days));
                     return response.data;
@@ -76,7 +81,7 @@ export class api {
                     // throw error;
                 }
             },
-            search_trending: PromiseRejectionEvent = async () => {
+            search_trending: async () => {
                 try {
                     const response = await this.#AxiosInstance.get(this.#paths.search_trending);
                     return response.data;
@@ -85,15 +90,16 @@ export class api {
                     console.error(error);
                 }
             },
-            simple_price: PromiseRejectionEvent = async (id: string, currency: string,) => {
+            simple_price: async (id: string, currency?: string): Promise<ArrayLike<TSimplePrice> | { [s: string]: TSimplePrice }> => {
                 try {
                     const response = await this.#AxiosInstance.get(this.#paths.simple_price(id, currency));
                     return response.data;
                 }
                 catch (error) {
                     console.error(error);
+                    throw (error);
                 }
             }
-        }
-    }
-}
+        };
+    };
+};

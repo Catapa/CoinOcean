@@ -1,21 +1,21 @@
 import React from 'react';
 import styles from './Table.module.css';
-import {TableProps} from './TableProps';
+import {TTableProps} from './TableProps';
 import TableHeader from "./TableHeader/TableHeader";
 import TableRow from "./TableRow/TableRow";
 import {useNavigate} from "react-router";
 import Pagination from "../Pagination/Pagination";
 
-const Table = ({fields, data, onPageSelect}: TableProps) => {
-    const navigate = useNavigate()
+const Table = ({fields, data, onPageSelect}: TTableProps) => {
+    const navigate = useNavigate();
     let headers: string[] = [];
-    let fieldKeys: any[] = [];
+    let fieldKeys: string[] = [];
     for(const [dataObjectKey, header] of Object.entries(fields)) {
         fieldKeys.push(dataObjectKey);
         headers.push(header);
     }
     const handleRowClick = (itemID: string) => {
-        navigate(`/${itemID}`)
+        navigate(`/${itemID}`);
     }
     const changePage = (callBackResult: string) => {
         const toPage = callBackResult;
@@ -39,6 +39,6 @@ const Table = ({fields, data, onPageSelect}: TableProps) => {
             <Pagination onPageSelect={changePage}/>
         </React.Fragment>
 
-    )
-}
-export default Table
+    );
+};
+export default Table;

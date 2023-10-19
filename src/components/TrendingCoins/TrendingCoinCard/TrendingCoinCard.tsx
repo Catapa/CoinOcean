@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './TrendingCoinCard.module.css';
-import type {TrendingCoinType} from "../TrendingCoins";
+import type {TTrendingCoin} from "../TrendingCoins";
 import {useNavigate} from "react-router";
 
-interface propType {
-    coinData: TrendingCoinType
-}
+type TProps = {
+    coinData: TTrendingCoin
+};
 
-const TrendingCoinCard = (props: propType) => {
+const TrendingCoinCard = (props: TProps) => {
     const navigate = useNavigate();
     const gotoDetailPage = (id: string) => {
         navigate(`/${id}`);
@@ -20,5 +20,5 @@ const TrendingCoinCard = (props: propType) => {
             <span className={styles.coin_score}>#{props.coinData.score + 1}</span>
         </div>
     );
-}
+};
 export default TrendingCoinCard;

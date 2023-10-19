@@ -3,7 +3,7 @@ import styles from './TrendingCoins.module.css';
 import {api} from "../../api/api";
 import TrendingCoinCard from "./TrendingCoinCard/TrendingCoinCard";
 
-export interface TrendingCoinType {
+export type TTrendingCoin  = {
     coin_id: number,
     id: string,
     large: string,
@@ -15,37 +15,36 @@ export interface TrendingCoinType {
     small: string,
     symbol: string,
     thumb: string
-}
-interface TrendingResponseType {
+};
+type TTrendingResponse = {
     coins: Array<{
-        item: TrendingCoinType
+        item: TTrendingCoin
     }>,
     exchanges: []
-}
+};
 
 const TrendingCoins = () => {
     const API = new api.CoinGecko();
-    let [trending: TrendingResponseType, setTrending] = useState({});
+    let [trending, setTrending] = useState<TTrendingResponse>();
     useEffect(() => {
         API.get.search_trending()
-            .then((response:TrendingResponseType) => {
+            .then((response: TTrendingResponse) => {
                 setTrending(response);
             })
             .catch(error => {
                 console.error(error);
             })
-    }, [])
+    }, []);
     return (
         <section>
             <h2 className={styles.trending_coins_label}>Trending Searches (last 24h)</h2>
             <div className={styles.trending_coins_container}>
-                {(trending.coins) && trending.coins.map(({item}) =>
+                {(trending?.coins) && trending?.coins.map(({item}) =>
                     <TrendingCoinCard key={item.id} coinData={item}/>
                 )
                 }
             </div>
         </section>
-
-    )
-}
-export default TrendingCoins
+    );
+};
+export default TrendingCoins;
