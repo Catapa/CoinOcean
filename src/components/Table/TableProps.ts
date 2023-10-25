@@ -3,11 +3,12 @@ import { Key, MouseEventHandler } from "react";
 type headersType = string[];
 type tableFieldsType = Object;
 type tableDataType = Object;
-type TRowData = {
-    id: Key | null | undefined,
+export type TRowData = {
+    [key: string]: Key | string | null | undefined,
+    id: Key | string | null | undefined,
 };
 
-export type TTableProps =  {
+export type TTableProps = {
     fields: tableFieldsType,
     data: tableDataType,
     onPageSelect: Function

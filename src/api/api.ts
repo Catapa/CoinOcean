@@ -28,7 +28,10 @@ export class api {
             try {
                 this.#AxiosInstance = axios.create({
                     baseURL: this.#URL,
-                    timeout: 10000
+                    timeout: 10000,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*"
+                    }
                 })
             }
             catch (error) {
@@ -51,14 +54,14 @@ export class api {
                     //throw error;
                 }
             },
-            coins_markets: async (currency?: string, order?: string, page?: number) => {
+            coins_markets: async (currency?: string, order?: string, page?: number): Promise<Object> => {
                 try {
                     const response = await this.#AxiosInstance.get(this.#paths.coins_markets(currency, order, page));
                     return response.data
                 }
                 catch (error) {
                     console.error(error);
-                    // throw error;
+                    throw error;
                 }
             },
             coins_id: async (id: string | undefined) => {

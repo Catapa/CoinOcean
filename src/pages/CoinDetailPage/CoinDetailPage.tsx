@@ -2,39 +2,39 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {api} from "../../api/api";
 import styles from './CoinDetailPage.module.css'
-import ChangeIntervalButtons from "../../components/ChangeIntervalButtons/ChangeIntervalButtons";
 import {clearHTML, formatNumber} from "../../utils/utils";
 import type {TCoin} from "../../utils/utils";
-import PriceHistoryChart from "../../components/PriceHistoryChart/PriceHistoryChart";
+import { ChangeIntervalButtons, PriceHistoryChart } from 'src/components';
 
 const CoinDetailPage = () => {
     const {coinID} = useParams();
-    let [coin, setCoin] = useState<TCoin | undefined>(undefined);
+    const [coin, setCoin] = useState<TCoin | undefined>(undefined);
+    const [priceChange, setPriceChange] = useState(((coin?.market_data) && coin?.market_data.price_change_percentage_24h_in_currency.usd) || 0);
     const API = new api.CoinGecko();
     useEffect(() => {
-        API.get.coins_id(coinID)
-            .then(response => {
+        (async () => {
+            try {
+                const response = await API.get.coins_id(coinID);
                 setCoin(response);
+                
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+    }, []);
 
-            })
-            .catch(error => {
-                console.error(error);
-                throw error;
-            })
-    }, [])
-
-    let [priceChange, setPriceChange] = useState(((coin?.market_data) && coin?.market_data.price_change_percentage_24h_in_currency.usd) || 0);
+    
     const getPriceChange = (callBackResult: string) => {
         let resultStr: string = `coin.market_data.price_change_percentage_${callBackResult}_in_currency.usd`;
         let result = eval(resultStr)
         setPriceChange(result);
-    }
+    };
 
     const priceStyles = () => {
         let classes = [styles.price];
         classes.push(priceChange > 0 ? styles.green : styles.red);
         return classes.join(' ');
-    }
+    };
 
     return (
         <div className={styles.grid_container}>
@@ -59,5 +59,5 @@ const CoinDetailPage = () => {
             <PriceHistoryChart coinID={coinID} coinName={coin?.name}/>
         </div>
     )
-}
-export default CoinDetailPage
+};
+export default CoinDetailPage;

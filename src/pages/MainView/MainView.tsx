@@ -15,5 +15,5 @@ const MainView = () => {
             <Footer/>
         </div>
     )
-}
-export default MainView
+};
+export default MainView;

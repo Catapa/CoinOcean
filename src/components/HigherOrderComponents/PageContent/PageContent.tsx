@@ -7,7 +7,7 @@ type TPageContent = {
 
 const PageContent = ({children}: TPageContent) => {
     return (
-        <div className={styles.padding + ' ' + styles.margin}>
+        <div className={`${styles.padding} ${styles.margin}`}>
             {children}
         </div>
     );

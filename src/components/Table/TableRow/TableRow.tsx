@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './TableRow.module.css';
-import type {TTableRowProps} from "../TableProps";
+import type {TTableRowProps, TRowData} from "../TableProps";
 import {formatNumber} from "../../../utils/utils";
 const TableRow = ({fieldKeys, rowData, onClick}: TTableRowProps) => {
     const getStyles = (key: string, data: number) => {
@@ -21,9 +21,14 @@ const TableRow = ({fieldKeys, rowData, onClick}: TTableRowProps) => {
                 fieldKeys.map(key =>
                     {
                         return (
-                            <td key={rowData[key]}>
+                            <td key={rowData[key as keyof TRowData]}>
                             {
-                                (key === 'image') ? <img src={rowData[key]} alt={'logo'}/> : <span className={getStyles(key, rowData[key])}>{formatNumber(rowData[key])}</span>
+                                (key === 'image') ? 
+                                <img src={rowData[key as keyof TRowData] as string} alt={'logo'}/> 
+                                : 
+                                <span className={getStyles(key, rowData[key] as number)}>
+                                    {formatNumber(rowData[key] as number)}
+                                </span>
                             }
                             </td>
                         )
